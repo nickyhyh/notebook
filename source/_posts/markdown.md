@@ -1,6 +1,14 @@
 ---
 title: 学习markdown语法
 ---
+# 发布笔记步骤
+1.`npm run build`
+2.commit修改的内容
+3.push修改内容
+4.`npm run publish`
+# 本地预览
+1.启动`npm run server`
+2.停止预览：ctrl+c
 
 # 这是一级标题
 ## 这是二级标题

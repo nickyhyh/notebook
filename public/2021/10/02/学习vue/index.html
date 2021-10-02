@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Hexo</title>
+    <title>学习vue | Hexo</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,15 +51,14 @@
 </div>
 
   <div id='main-part'>
-      
-    <div class="main">
+      <div class="main">
 <div class="blog-post">
     <!-- Title -->
-    
-      <h1 class="blog-post-title">
-        <a href="/notebook/2021/10/02/%E5%AD%A6%E4%B9%A0vue/">学习Vue</a>
-      </h1>
-    
+    <h1 class="blog-post-title">
+        <a href="/notebook/2021/10/02/学习vue/">
+            学习Vue
+        </a>
+    </h1>
     <!-- Date and Author -->
     <p class="blog-post-meta">
         2021-10-02
@@ -71,108 +70,43 @@
     <!-- Content -->
     <p>seen为true时，v-if和v-show没有差别，都显示P标签内容。<br>seen为false时,页面不显示内容，但是html里显示p标签<br>v-if : 不显示P标签<br>v-show : 显示P标签，<p style="display:none">现在你看到我了</p></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">            <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;</span><br><span class="line">                <span class="attr">message</span>: <span class="string">&#x27;Hello Vue!&#x27;</span>,</span><br><span class="line">                <span class="attr">seen</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
-    <!-- Only display the Read More link if we are displaying an excerpt -->
+
+    <!-- Social share choices -->
     
+  <div id="social-share">
+    <a data-url="https://nickyhyh.github.io/notebook/2021/10/02/%E5%AD%A6%E4%B9%A0vue/" target="_blank" rel="noopener" href="https://plus.google.com/share?url=" class="googleplus"><img src="/notebook/image/googleplusicon.png" alt=""/></a>
+    <a data-url="https://nickyhyh.github.io/notebook/2021/10/02/%E5%AD%A6%E4%B9%A0vue/" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=" class="twitter"><img src="/notebook/image/twittericon.png" alt=""/></a>
+    <a data-url="https://nickyhyh.github.io/notebook/2021/10/02/%E5%AD%A6%E4%B9%A0vue/" target="_blank" rel="noopener" href="http://pinterest.com/pin/create/button/?url=" class="pinterest"><img src="/notebook/image/pinteresticon.png" alt=""/></a>
+    <a data-url="https://nickyhyh.github.io/notebook/2021/10/02/%E5%AD%A6%E4%B9%A0vue/" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=" class="facebook"><img src="/notebook/image/facebookicon.png" alt=""/></a>
+  </div>
+
+
+
+
+
+<!--
+
+
+https://www.facebook.com/sharer/sharer.php?u=https://nickyhyh.github.io/notebook/2021/10/02/%E5%AD%A6%E4%B9%A0vue/
+https://nickyhyh.github.io/notebook/2021/10/02/%25E5%25AD%25A6%25E4%25B9%25A0vue/
+-->
+
+
 
     <hr />
 
+
+    <!-- Tags and Categories links -->
     
 
     
 
 
+    <!-- Comment using disqus -->
+    
 
 </div>
 </div>
-
-
-    <div class="main">
-<div class="blog-post">
-    <!-- Title -->
-    
-      <h1 class="blog-post-title">
-        <a href="/notebook/2021/10/02/markdown/">学习Markdown语法</a>
-      </h1>
-    
-    <!-- Date and Author -->
-    <p class="blog-post-meta">
-        2021-10-02
-        
-    </p>
-
-    
-
-    <!-- Content -->
-    <h1 id="发布笔记步骤"><a href="#发布笔记步骤" class="headerlink" title="发布笔记步骤"></a>发布笔记步骤</h1><p>1.<code>npm run build</code><br>2.commit修改的内容<br>3.push修改内容<br>4.<code>npm run publish</code></p>
-<h1 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h1><p>1.启动<code>npm run server</code><br>2.停止预览：ctrl+c</p>
-<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><p><strong>这是加粗的文字</strong><br><em>这是倾斜的文字</em>`<br><em><strong>这是斜体加粗的文字</strong></em><br><del>这是加删除线的文字</del></p>
-<blockquote>
-<p>这是引用的内容</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>这是引用的内容</p>
-</blockquote>
-</blockquote>
-<hr>
-<hr>
-<hr>
-<hr>
-<p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&fm=27&gp=0.jpg" alt="blockchain" title="区块链"></p>
-<p><a target="_blank" rel="noopener" href="http://jianshu.com/">简书</a><br><a target="_blank" rel="noopener" href="http://baidu.com/">百度</a></p>
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-<ol>
-<li>列表内容</li>
-<li>列表内容</li>
-<li>列表内容</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>表头</th>
-<th align="center">表头</th>
-<th align="right">表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>内容</td>
-<td align="center">内容</td>
-<td align="right">内容</td>
-</tr>
-<tr>
-<td>内容</td>
-<td align="center">内容</td>
-<td align="right">内容</td>
-</tr>
-</tbody></table>
-<p><code>create database hero;</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
-
-    <!-- Only display the Read More link if we are displaying an excerpt -->
-    
-
-    <hr />
-
-    
-
-    
-
-
-
-</div>
-</div>
-
-
-
-
 
 
   </div>
