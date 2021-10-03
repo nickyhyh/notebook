@@ -8,7 +8,7 @@ title: 学习markdown语法
 4.`npm run publish`
 ## 发布报错
 1.git status:检查commit状态 
-2.git not clean：
+2.git clean:清除未被 add 或被 commit 的本地修改
 3.git checkout -f:强制切换分支
 4.git branch -D gh-pages-xxx:删除xxx分支
 提示error: Cannot delete branch 'gh-pages-b039354' checked out at 'E:/note'
@@ -23,8 +23,10 @@ title: 学习markdown语法
 1.启动`npm run server`
 2.停止预览：ctrl+c
 
-# 这是一级标题
-## 这是二级标题
+# 在html里面调用vue
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+注意各个同级属性间“,”分割
+
 ### 这是三级标题
 #### 这是四级标题
 ##### 这是五级标题
