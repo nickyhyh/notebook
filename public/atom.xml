@@ -6,7 +6,7 @@
   <link href="https://nickyhyh.github.io/notebook/atom.xml" rel="self"/>
   
   <link href="https://nickyhyh.github.io/notebook/"/>
-  <updated>2021-10-03T03:19:42.156Z</updated>
+  <updated>2021-10-03T08:49:56.350Z</updated>
   <id>https://nickyhyh.github.io/notebook/</id>
   
   <author>
@@ -17,13 +17,13 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>git常用命令</title>
     <link href="https://nickyhyh.github.io/notebook/2021/10/03/git%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/"/>
     <id>https://nickyhyh.github.io/notebook/2021/10/03/git%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/</id>
     <published>2021-10-03T02:55:30.662Z</published>
-    <updated>2021-10-03T03:19:42.156Z</updated>
+    <updated>2021-10-03T08:49:56.350Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><p>git init - 初始化仓库<br>git clone - 拷贝一份远程仓库</p><h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><p>git add - 添加文件到暂存区<br>git commit - 将暂存区内容添加到仓库中<br>git status - 查看仓库当前状态，显示有变更的文件<br>git diff - 比较暂存区和工作区文件的不同<br>git rm- 删除工作区文件<br>git reset  - 回退版本</p><h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><p>git remote - 远程仓库操作<br>git fetch - 从远程获取代码块<br>git pull - 下载远程代码并合并<br>git push - 上传远程代码并合并</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="创建仓库命令"><a href="#创建仓库命令" class="headerlink" title="创建仓库命令"></a>创建仓库命令</h1><p>git init - 初始化仓库<br>git clone - 拷贝一份远程仓库</p><h1 id="提交与修改"><a href="#提交与修改" class="headerlink" title="提交与修改"></a>提交与修改</h1><p>git add - 添加文件到暂存区<br>git commit - 将暂存区内容添加到仓库中<br>git status - 查看仓库当前状态，显示有变更的文件<br>git diff - 比较暂存区和工作区文件的不同<br>git rm- 删除工作区文件<br>git reset  - 回退版本</p><h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><p>git remote - 远程仓库操作<br>git fetch - 从远程获取代码块<br>git pull - 下载远程代码并合并<br>git push - 上传远程代码并合并</p><h1 id="发布笔记步骤"><a href="#发布笔记步骤" class="headerlink" title="发布笔记步骤"></a>发布笔记步骤</h1><p>1.<code>npm run build</code><br>2.commit修改的内容<br>3.push修改内容<br>4.<code>npm run publish</code></p><h2 id="发布报错"><a href="#发布报错" class="headerlink" title="发布报错"></a>发布报错</h2><p>1.git status:检查commit状态<br>2.git clean:清除未被 add 或被 commit 的本地修改<br>3.git checkout -f:强制切换分支<br>4.git branch -D gh-pages-xxx:删除xxx分支<br>提示error: Cannot delete branch ‘gh-pages-b039354’ checked out at ‘E:/note’<br>切换分支:<br><code>git checkout master </code><br><code>git branch -D gh-pages-xxx</code><br><code>git push</code><br><code>npm run publish</code></p>]]></content>
     
     
       
@@ -62,14 +62,15 @@
     <link href="https://nickyhyh.github.io/notebook/2021/10/02/markdown/"/>
     <id>https://nickyhyh.github.io/notebook/2021/10/02/markdown/</id>
     <published>2021-10-02T07:28:40.606Z</published>
-    <updated>2021-10-03T06:51:26.355Z</updated>
+    <updated>2021-10-03T08:48:49.511Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="发布笔记步骤"><a href="#发布笔记步骤" class="headerlink" title="发布笔记步骤"></a>发布笔记步骤</h1><p>1.<code>npm run build</code><br>2.commit修改的内容<br>3.push修改内容<br>4.<code>npm run publish</code></p><h2 id="发布报错"><a href="#发布报错" class="headerlink" title="发布报错"></a>发布报错</h2><p>1.git status:检查commit状态<br>2.git clean:清除未被 add 或被 commit 的本地修改<br>3.git checkout -f:强制切换分支<br>4.git branch -D gh-pages-xxx:删除xxx分支<br>提示error: Cannot delete branch ‘gh-pages-b039354’ checked out at ‘E:/note’<br>切换分支:<br><code>git checkout master </code><br><code>git branch -D gh-pages-xxx</code><br><code>git push</code><br><code>npm run publish</code></p><h1 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h1><p>1.启动<code>npm run server</code><br>2.停止预览：ctrl+c</p><h1 id="在html里面调用vue"><a href="#在html里面调用vue" class="headerlink" title="在html里面调用vue"></a>在html里面调用vue</h1><script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script><p>注意各个同级属性间“,”分割</p><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><p><strong>这是加粗的文字</strong><br><em>这是倾斜的文字</em>`<br><em><strong>这是斜体加粗的文字</strong></em><br><del>这是加删除线的文字</del></p><blockquote><p>这是引用的内容</p></blockquote><blockquote><blockquote><p>这是引用的内容</p></blockquote></blockquote><hr><hr><hr><hr><p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&fm=27&gp=0.jpg" alt="blockchain" title="区块链"></p><p><a href="http://jianshu.com/">简书</a><br><a href="http://baidu.com/">百度</a></p><ul><li>列表内容</li></ul><ul><li>列表内容</li></ul><ul><li>列表内容</li></ul><ol><li>列表内容</li><li>列表内容</li><li>列表内容</li></ol><table><thead><tr><th>表头</th><th align="center">表头</th><th align="right">表头</th></tr></thead><tbody><tr><td>内容</td><td align="center">内容</td><td align="right">内容</td></tr><tr><td>内容</td><td align="center">内容</td><td align="right">内容</td></tr></tbody></table><p><code>create database hero;</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h1><p>1.启动<code>npm run server</code><br>2.停止预览：ctrl+c</p><h1 id="在html里面调用vue"><a href="#在html里面调用vue" class="headerlink" title="在html里面调用vue"></a>在html里面调用vue</h1><script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script><p>注意各个同级属性间“,”分割</p><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><p><strong>这是加粗的文字</strong><br><em>这是倾斜的文字</em>`<br><em><strong>这是斜体加粗的文字</strong></em><br><del>这是加删除线的文字</del></p><blockquote><p>这是引用的内容</p></blockquote><blockquote><blockquote><p>这是引用的内容</p></blockquote></blockquote><hr><hr><hr><hr><p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&fm=27&gp=0.jpg" alt="blockchain" title="区块链"></p><p><a href="http://jianshu.com/">简书</a><br><a href="http://baidu.com/">百度</a></p><ul><li>列表内容</li></ul><ul><li>列表内容</li></ul><ul><li>列表内容</li></ul><ol><li>列表内容</li><li>列表内容</li><li>列表内容</li></ol><table><thead><tr><th>表头</th><th align="center">表头</th><th align="right">表头</th></tr></thead><tbody><tr><td>内容</td><td align="center">内容</td><td align="right">内容</td></tr><tr><td>内容</td><td align="center">内容</td><td align="right">内容</td></tr></tbody></table><p><code>create database hero;</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;发布笔记步骤&quot;&gt;&lt;a href=&quot;#发布笔记步骤&quot; class=&quot;headerlink&quot; title=&quot;发布笔记步骤&quot;&gt;&lt;/a&gt;发布笔记步骤&lt;/h1&gt;&lt;p&gt;1.&lt;code&gt;npm run build&lt;/code&gt;&lt;br&gt;2.commit修改的内容&lt;br&gt;3.pus</summary>
+    <summary type="html">&lt;h1 id=&quot;本地预览&quot;&gt;&lt;a href=&quot;#本地预览&quot; class=&quot;headerlink&quot; title=&quot;本地预览&quot;&gt;&lt;/a&gt;本地预览&lt;/h1&gt;&lt;p&gt;1.启动&lt;code&gt;npm run server&lt;/code&gt;&lt;br&gt;2.停止预览：ctrl+c&lt;/p&gt;
+&lt;h1 id=&quot;在</summary>
       
     
     
