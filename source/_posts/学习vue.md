@@ -92,7 +92,8 @@ destroyed:Vue 实例指示的所有东西都会解绑定，所有的事件监听
 ```
 # 创建hello项目
 `vue create hello-world`
-# 创建一个网页
+
+# 创建网页
 1.views文件夹中创建FirstPage.vue
 ```javascript
 <template>
