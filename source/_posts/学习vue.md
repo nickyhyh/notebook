@@ -60,7 +60,7 @@ Vue.component('todo-item', {
         //document.querySelector:在页面上查找id="li"的元素
 ```
 destroyed:Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
-创建了一个组件2秒后销毁组件
+定义一个名为todo-item的组件2秒后销毁组件
 ```javascript
  <div id="app">
         <todo-item v-if="show" :todo="todoitem"></todo-item>
@@ -90,3 +90,61 @@ destroyed:Vue 实例指示的所有东西都会解绑定，所有的事件监听
         })
     </script>
 ```
+# 创建hello项目
+`vue create hello-world`
+# 创建一个网页
+1.views文件夹中创建FirstPage.vue
+```javascript
+<template>
+  <div class="FirstPage">
+    <h1>This is an FirstPage</h1>
+  </div>
+</template>
+```
+2.router文件夹下index.js中引用FirstPage.vue
+```javascript
+const routes = [{
+         {
+        path: '/FirstPage',
+        name: 'FirstPage',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/FirstPage.vue')
+    }]
+```
+component有两种定义方式
+```javascript
+import SecondPage from '../views/SecondPage.vue'
+{
+        path: '/SecondPage',
+        name: 'SecondPage',
+        component: SecondPage
+    },
+```
+```javascript
+{
+        path: '/SecondPage',
+        name: 'SecondPage',
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+ },
+```
+Home.vue中自定义了HelloWorld元素，引用到HelloWorld.vue
+`import HelloWorld from '@/components/HelloWorld.vue'`
+HelloWorld.vue中引用HelloWorld元素
+```javascript
+<template>
+  <div class="hello">
+   <h1>{{ msg }}</h1>
+  </div>
+</template>
+<script>
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  }
+}
+</script>
+```
+router文件是针对App.vue的路由，对应的内容全部都会显示在<router-view></router-view>中，App.vue会自动寻找这一些组件，比如，在目前的index.js中，path显示的是“/”这就意味着当页面打开到App.vue，而没有增加其他的url后缀的时候 （http://localhost:8080/#/），App.vue会自动载入HelloWorld这个组件。
+
+

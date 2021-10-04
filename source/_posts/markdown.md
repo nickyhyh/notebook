@@ -52,3 +52,4 @@ title: 学习markdown语法
     }
     fun();
 ```
+ctrl+`:调出终端
