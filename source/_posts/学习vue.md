@@ -148,4 +148,28 @@ export default {
 ```
 router文件是针对App.vue的路由，对应的内容全部都会显示在<router-view></router-view>中，App.vue会自动寻找这一些组件，比如，在目前的index.js中，path显示的是“/”这就意味着当页面打开到App.vue，而没有增加其他的url后缀的时候 （http://localhost:8080/#/），App.vue会自动载入HelloWorld这个组件。
 
-
+# vue-router中children使用方法
+router:index.js
+```javascript
+const routes = [{
+        path: '/',
+        name: 'Home',
+        component: Home,
+        children: [{
+            path: '/page1',
+            name: 'page1',
+            component: function() {
+                return import ( /* webpackChunkName: "about" */ '../views/FirstPage.vue')
+            }
+        }]
+    }]
+```
+Home.vue
+``` JavaScript
+<template>
+  <div class="home">
+    <span><router-link to="/page1">导航一</router-link></span>
+   <router-view></router-view>
+  </div>
+</template>
+```
