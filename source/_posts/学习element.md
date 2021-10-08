@@ -1,3 +1,6 @@
+---
+title: 学习Element
+---
 # npm安装element
 `npm i element-ui -S`
 
@@ -47,4 +50,137 @@ export default {
     <el-menu-item index="2-2">选项2</el-menu-item>
     <el-menu-item index="2-3">选项3</el-menu-item>
   </el-submenu>
+```
+# Dialog 对话框
+需要设置visible属性，它接收Boolean，当为true时显示 Dialog。Dialog 分为两个部分：body和footer，footer需要具名为footer的slot。title属性用于定义标题，它是可选的，默认值为空。
+## 弹出"注册成功"的提示
+```html
+<el-button type=input" @click="dialogVisible = true">立即创建</el-button>
+<el-dialog
+  title="提示"
+  :visible.sync="dialogVisible"
+  width="30%"
+  :before-close="handleClose">
+  <span>注册成功</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+```
+
+```JavaScript
+export default {
+  data() {
+    return {
+      dialogVisible: false
+    };
+  },
+  methods: {
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    }
+  }
+};
+```
+# Table 表格
+用于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作
+## 创建一个可选择固定列和表头的表格
+height属性固定表头，flex属性固定列，stripe属性可以创建带斑马纹的表格。
+Table 组件是不具有竖直方向的边框的，如果需要可以使用border属性设置为true即可启用
+``` html
+<el-table
+  :data="tableData"
+  height="250"
+  style="width: 100%"
+  border
+  >
+  <el-table-column
+    prop="name"
+    label="名称"
+    width="180">
+  </el-table-column>
+  <el-table-column
+    prop="price"
+    label="价格">
+  </el-table-column>
+</el-table>
+```
+
+```JavaScript
+export default {
+  data() {
+    return {
+      tableData: [{
+        name: 'Applejuice',
+        price: '20'
+      }, {
+        name: 'Lemmonjuice',
+        price: '25'
+      }, {
+        name: 'watermelonjuice',
+        price: '30'
+      }, {
+        name: 'Margojuice',
+        price: '25'
+      },{
+        name: 'Applejuice',
+        price: '20'
+      }, {
+        name: 'Lemmonjuice',
+        price: '25'
+      }, {
+        name: 'watermelonjuice',
+        price: '30'
+      }, {
+        name: 'Margojuice',
+        price: '25'
+      }]
+    }
+  }
+}
+```
+# Form 表单
+inline 属性可以让表单域变为行内的表单域
+label-position 属性可以改变表单域标签的位置，可选值为 top、left，当设为 top 时标签会置于表单域的顶部
+Form 组件提供了表单验证的功能，只需要通过 rules 属性传入约定的验证规则，并将 Form-Item 的 prop 属性设置为需校验的字段名即可
+
+``` html
+<el-form-item label="姓名">
+  <el-input v-model="formLabelAlign.user" placeholder=""></el-input>
+</el-form-item>
+<el-form-item label="活动名称" prop="name">
+  <el-input v-model="formLabelAlign.name"></el-input>
+</el-form-item>
+<el-form-item label="性别">
+  <el-select v-model="formLabelAlign.region" placeholder="">
+    <el-option label="男" value="man"></el-option>
+    <el-option label="女" value="women"></el-option>
+  </el-select>
+</el-form-item>
+```
+
+``` javascript
+export default {
+  data() {
+    return {
+      labelPosition: "right",
+      formLabelAlign: {
+        user: "",
+        region: "",
+        name: "",
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        ],
+      },
+    };
+  },
+};
 ```
