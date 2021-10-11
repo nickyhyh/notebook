@@ -1,6 +1,56 @@
 ---
 title: 学习vue
 ---
+# Vue框架的特点
+1.模板渲染：基于 html 的模板语法，学习成本低。
+
+2.响应式的更新机制：数据改变之后，视图会自动刷新。【重要】
+
+3.渐进式框架
+
+4.组件化/模块化
+
+5.轻量：开启 gzip压缩后，可以达到 20kb 大小
+
+# 利用 vue-cli 新建一个空的项目
+## 安装 vue-cli（命令行工具
+`# 全局安装 vue-cli`
+`$ npm install -g @vue/cli`
+## 初始化一个 simple 项目
+1.` vue create my-app`
+如果初学者，直接选default就行。之后会自动生成一个空的初始化项目，包含了项目目录、以及项目依赖的脚本
+
+buid：打包配置的文件夹
+
+config：webpack对应的配置
+
+src：开发项目的源码
+
+App.vue：入口组件。.vue文件都是组件。
+main.js：项目入口文件。
+static：存放静态资源
+
+.babelrc：解析ES6的配置文件
+
+.editorcofnig：编辑器的配置
+
+.postcssrc.js：html添加前缀的配置
+
+index.html：单页面的入口。通过 webpack打包后，会把 src 源码进行编译，插入到这个 html 里面来。
+
+package.json：项目的基础配置，包含版本号、脚本命令、项目依赖库、开发依赖库、引擎等。
+
+2.2）本地运行项目：
+` cd my-app`
+ ` npm run serve`
+ 浏览器输入http://localhost:8080/，就可以让这个空的项目在本地跑起来
+ 备注：我们在 GitHub上下载的任何Vue有关的项目，第一步都是要首先执行 npm install，安装依赖的 mode_modules，然后再运行。
+
+# html中导入vue
+ <!--1、导入Vue的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    
+# vue语法
 v-bind : 属性名 简写 ：属性名
 seen为true时，v-if和v-show没有差别，都显示P标签内容。
 seen为false时,页面不显示内容，但是html里显示p标签。

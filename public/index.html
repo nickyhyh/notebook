@@ -130,6 +130,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h1><p>1.启动:<code>npm run server</code><br>2.停止预览：ctrl+c</p>
+<h1 id="启动elm后台管理系统"><a href="#启动elm后台管理系统" class="headerlink" title="启动elm后台管理系统"></a>启动elm后台管理系统</h1><p><code>npm run dev</code></p>
 <h1 id="在html里面调用vue"><a href="#在html里面调用vue" class="headerlink" title="在html里面调用vue"></a>在html里面调用vue</h1><script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <p>注意各个同级属性间“,”分割</p>
 <h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><p>ctrl+x:删除一行<br>ctrl+f:查找</p>
@@ -241,6 +242,8 @@
 <h1 id="远程操作"><a href="#远程操作" class="headerlink" title="远程操作"></a>远程操作</h1><p>git remote - 远程仓库操作<br>git fetch - 从远程获取代码块<br>git pull - 下载远程代码并合并<br>git push - 上传远程代码并合并</p>
 <h1 id="发布笔记步骤"><a href="#发布笔记步骤" class="headerlink" title="发布笔记步骤"></a>发布笔记步骤</h1><p>1.<code>npm run build</code><br>2.commit修改的内容<br>3.push修改内容<br>4.<code>npm run publish</code></p>
 <h2 id="发布报错"><a href="#发布报错" class="headerlink" title="发布报错"></a>发布报错</h2><p>1.git status:检查commit状态<br>2.git clean:清除未被 add 或被 commit 的本地修改<br>3.git checkout -f:强制切换分支<br>4.git branch -D gh-pages-xxx:删除xxx分支<br>提示error: Cannot delete branch ‘gh-pages-b039354’ checked out at ‘E:/note’<br>切换分支:<br><code>git checkout master </code><br><code>git branch -D gh-pages-xxx</code><br><code>git push</code><br><code>npm run publish</code></p>
+<h1 id="全局配置用户信息"><a href="#全局配置用户信息" class="headerlink" title="全局配置用户信息"></a>全局配置用户信息</h1><p><code>git config --global user.name &quot;Nicky&quot;</code><br><code>git config --global user.email &quot;smyhvae@163.com&quot;</code></p>
+<h1 id="分支的合并"><a href="#分支的合并" class="headerlink" title="分支的合并"></a>分支的合并</h1><p>1.基于master分支，创建一个新的分支，起名为first_item_recommend<br><code>$ git branch first_item_recommend    // 创建新的分支</code><br><code>$ git checkout first_item_recommend  //切换到新的分支</code><br>2.在新的分支first_item_recommend上，完成开发工作，并 commit 、push。<br>3.将分支first_item_recommend上的开发进度合并到master分支：<br><code>$ git checkout master  //切换到master分支</code><br><code>$ git merge first_item_recommend    //将分支 first_item_recommend 的开发进度合并到 master 分支</code><br>4.合并之后，master分支和first_item_recommend分支会指向同一个位置。<br>5.删除分支first_item_recommend：<br><code>git branch -d first_item_recommend</code></p>
 
       
     </div>
@@ -282,7 +285,27 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>v-bind : 属性名 简写 ：属性名<br>seen为true时，v-if和v-show没有差别，都显示P标签内容。<br>seen为false时,页面不显示内容，但是html里显示p标签。<br>v-if : 不显示P标签<br>v-show : 显示P标签，<p style="display:none">现在你看到我了</p></p>
+        <h1 id="Vue框架的特点"><a href="#Vue框架的特点" class="headerlink" title="Vue框架的特点"></a>Vue框架的特点</h1><p>1.模板渲染：基于 html 的模板语法，学习成本低。</p>
+<p>2.响应式的更新机制：数据改变之后，视图会自动刷新。【重要】</p>
+<p>3.渐进式框架</p>
+<p>4.组件化/模块化</p>
+<p>5.轻量：开启 gzip压缩后，可以达到 20kb 大小</p>
+<h1 id="利用-vue-cli-新建一个空的项目"><a href="#利用-vue-cli-新建一个空的项目" class="headerlink" title="利用 vue-cli 新建一个空的项目"></a>利用 vue-cli 新建一个空的项目</h1><h2 id="安装-vue-cli（命令行工具"><a href="#安装-vue-cli（命令行工具" class="headerlink" title="安装 vue-cli（命令行工具"></a>安装 vue-cli（命令行工具</h2><p><code># 全局安装 vue-cli</code><br><code>$ npm install -g @vue/cli</code></p>
+<h2 id="初始化一个-simple-项目"><a href="#初始化一个-simple-项目" class="headerlink" title="初始化一个 simple 项目"></a>初始化一个 simple 项目</h2><p>1.<code> vue create my-app</code><br>如果初学者，直接选default就行。之后会自动生成一个空的初始化项目，包含了项目目录、以及项目依赖的脚本</p>
+<p>buid：打包配置的文件夹</p>
+<p>config：webpack对应的配置</p>
+<p>src：开发项目的源码</p>
+<p>App.vue：入口组件。.vue文件都是组件。<br>main.js：项目入口文件。<br>static：存放静态资源</p>
+<p>.babelrc：解析ES6的配置文件</p>
+<p>.editorcofnig：编辑器的配置</p>
+<p>.postcssrc.js：html添加前缀的配置</p>
+<p>index.html：单页面的入口。通过 webpack打包后，会把 src 源码进行编译，插入到这个 html 里面来。</p>
+<p>package.json：项目的基础配置，包含版本号、脚本命令、项目依赖库、开发依赖库、引擎等。</p>
+<p>2.2）本地运行项目：<br><code> cd my-app</code><br> <code> npm run serve</code><br> 浏览器输入<a target="_blank" rel="noopener" href="http://localhost:8080/%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%AE%A9%E8%BF%99%E4%B8%AA%E7%A9%BA%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%B7%91%E8%B5%B7%E6%9D%A5">http://localhost:8080/，就可以让这个空的项目在本地跑起来</a><br> 备注：我们在 GitHub上下载的任何Vue有关的项目，第一步都是要首先执行 npm install，安装依赖的 mode_modules，然后再运行。</p>
+<h1 id="html中导入vue"><a href="#html中导入vue" class="headerlink" title="html中导入vue"></a>html中导入vue</h1> <!--1、导入Vue的包-->
+<pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h1 id="vue语法"><a href="#vue语法" class="headerlink" title="vue语法"></a>vue语法</h1><p>v-bind : 属性名 简写 ：属性名<br>seen为true时，v-if和v-show没有差别，都显示P标签内容。<br>seen为false时,页面不显示内容，但是html里显示p标签。<br>v-if : 不显示P标签<br>v-show : 显示P标签，<p style="display:none">现在你看到我了</p></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">            <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;</span><br><span class="line">                <span class="attr">message</span>: <span class="string">&#x27;Hello Vue!&#x27;</span>,</span><br><span class="line">                <span class="attr">seen</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
 <p>v-for = “item in todo”<br>item.属性和item[属性]都可以访问到对象的属性值，区别在于item[属性]支持变量动态属性。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">todo: [&#123; <span class="attr">num</span>: <span class="string">&#x27;hello&#x27;</span>, <span class="attr">num2</span>: <span class="string">&#x27;456&#x27;</span> &#125;,</span><br><span class="line">       &#123; <span class="attr">num</span>: <span class="string">&#x27;123&#x27;</span>, <span class="attr">num2</span>: <span class="string">&#x27;789&#x27;</span> &#125;,</span><br><span class="line">       &#123; <span class="attr">key</span>: <span class="string">&#x27;num&#x27;</span>, &#125;]</span><br></pre></td></tr></table></figure>
