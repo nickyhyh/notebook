@@ -49,13 +49,109 @@ package.json：项目的基础配置，包含版本号、脚本命令、项目�
 # html中导入vue
  <!--1、导入Vue的包-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    
+
+
+
 # vue语法
-v-bind : 属性名 简写 ：属性名
-seen为true时，v-if和v-show没有差别，都显示P标签内容。
-seen为false时,页面不显示内容，但是html里显示p标签。
+v-cloak：保持和元素实例的关联，直到结束编译后自动消失。v-cloak指令和CSS 规则一起用的时候，能够解决差值表达式闪烁的问题（即：可以隐藏未编译的标签直到实例准备完毕。
+
+v-bind : 用于绑定属性。  简写 ：属性名
+
+v-text ：会覆盖元素中原本的内容,可以将一个变量的值渲染到指定的元素中。
+## 差值表达式和 v-text 的区别
+1： v-text 没有闪烁的问题，因为它是放在属性里的。
+2 :插值表达式只会替换自己的这个占位符，并不会把整个元素的内容清空。
+
+v-html :会被解析成html元素
+# v-on：事件绑定机制
+v-on:click：点击事件
+v-on的简写形式：
+`<button v-on:click="change">改变name的值</button>`
+可以简写成：
+`<button @click="change">改变name的值</button>`
+
+# v-on的常见事件修饰符
+## .stop 阻止冒泡。本质是调用 event.stopPropagation()
+例子：
+```JavaScript
+<body>
+    <div id="app">
+        <div class="father" @click="fatherClick">
+            <div class="child" @click="childClick">
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                fatherClick: function () {
+                    console.log('father 被点击了');
+                },
+                childClick: function () {
+                    console.log('child 被点击了');
+                }
+            }
+        })
+    </script>
+</body>
+```
+上方代码中，存在冒泡的现象，父标签中包含了一个子标签。当点击子标签时，父标签也会被触发。打印顺序是：
+  child 被点击了
+  father 被点击了
+如果我不想让子标签的点击事件冒泡到父亲，该怎么做呢？办法是：给子标签加一个事件修饰符.stop，阻止冒泡。代码如下：
+`<div class="child" @click.stop="childClick">`
+阻止冒泡后，当点击子标签时，打印结果是：
+ child 被点击了
+
+## .capture：触发事件时，采用捕获的形式，而不是冒泡的形式。
+还是采用上面的例子：当按钮点击时，如果想要采取捕获的方式，而不是冒泡的方式，办法是：可以直接在父标签上加事件修饰符.capture。代码如下：
+`<div class="father" @click.capture="fatherClick">`
+当点击子标签时，打印结果是：
+  father 被点击了
+  child 被点击了
+
+## .prevent 阻止默认事件（默认行为）。本质是调用 event.preventDefault()。
+表单的默认行为：点击按钮后表单就会被提交到form标签的action属性中指定的那个页面中去，
+```JavaScript
+ <form action="http://www.baidu.com">
+      <input type="submit" value="表单提交">
+    </form>
+```
+修改为点击按钮后，不提交到服务器，而是执行我们自己想要的事件（在submit方法中另行定义）。如下：
+```JavaScript
+<body>
+  <div id="app">
+    <!-- 阻止表单中submit的默认事件 -->
+    <form @submit.prevent action="http://www.baidu.com">
+      <!-- 执行自定义的click事件 -->
+      <input type="submit" @click="mySubmit" value="表单提交">
+    </form>
+  </div>
+</body>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+    },
+    methods: {
+      mySubmit: function() {
+        alert('ok');
+      }
+    }
+  });
+</script>
+```
+## .self 只有当事件在该元素本身（比如不是子元素）触发时，才会触发回调。
+在事件触发机制中，当点击子标签时，父标签会通过冒泡的形式被触发（父标签本身并没有被点击）。可如果我给父标签的点击事件设置.self修饰符，达到的效果是：子标签的点击事件不会再冒泡到父标签了，只有点击符标签本身，父标签的事件才会被触发。
+`<div class="father" @click.self="fatherClick">`
+.stop和.self都可以阻止冒泡，二者的区别在于：前者能够阻止整个冒泡行为，而后者只能阻止自己身上的冒泡行为。
+
 v-if : 不显示P标签
 v-show : 显示P标签，<p style="display:none">现在你看到我了</p>
+seen为true时，v-if和v-show没有差别，都显示P标签内容。
+seen为false时,页面不显示内容，但是html里显示p标签。
 
 ``` javascript
 var app = new Vue({
