@@ -319,3 +319,24 @@ Home.vue
   </div>
 </template>
 ```
+
+# Vue 内置的按键修饰符
+## v-on的按键修饰符
+Vue 允许为 v-on 在监听键盘事件时添加按键修饰符，例如：
+@keyup.enter="addData"表示：按住enter键后，执行addData()方法。全称是v-on:key.enter="addData"
+## 自定义全局按键修饰符
+（1）使用Vue.directive()自定义全局指令
+自定义全局指令 v-focus：让文本框自动获取焦点
+参数1：指令的名称。注意，在定义的时候，指令的名称前面，不需要加 v- 前缀；但是：在`调用`的时候，必须在指令名称前加上 v- 前缀
+参数2：是一个对象，这个对象身上，有一些指令相关的函数，这些函数可以在特定的阶段，执行相关的操作
+```javascript
+    Vue.directive('focus',
+     {bind: function (el)  //每当指令绑定到元素上的时候，会立即执行这个 bind 函数，【只执行一次】, 在元素刚绑定了指令的时候，还没有插入到 DOM中去，这时候调用 focus 方法没有作用,因为一个元素只有插入DOM之后，才能获取焦点
+    },
+     {inserted: function (el) {  // inserted 表示元素插入到DOM中的时候，会执行 inserted 函数【触发1次】
+            el.focus()
+    },
+     {updated: function (el) {  // 当VNode更新的时候，会执行 updated， 【可能会触发多次】 },
+     })
+```
+（2）在指定的文本框上加``：
