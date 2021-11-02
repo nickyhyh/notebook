@@ -340,3 +340,128 @@ Vue 允许为 v-on 在监听键盘事件时添加按键修饰符，例如：
      })
 ```
 （2）在指定的文本框上加``：
+
+# 单元素/组件的过渡
+Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡
+
+# 动画进入：
+v-enter：动画进入之前的初始状态
+v-enter-to：动画进入之后的结束状态
+v-enter-active：动画进入的时间段
+# 动画离开：
+v-leave：动画离开之前的初始状态
+v-leave-to：动画离开之后的结束状态
+v-leave-active：动画离开的时间段
+### v-enter-to和v-leave的状态是一样的。而且一般来说，v-enter和v-leave-to的状态也是一致的。所以，我们可以把这四个状态写成两组。
+
+# Vue组件的定义和注册
+组件：就是为了拆分Vue实例的代码量的，能够让我们以不同的组件，来划分不同的功能模块，将来我们需要什么样的功能，就可以去调用对应的组件即可。
+## 全局组件的定义和注册
+使用Vue.extend方法定义组件，使用 Vue.component方法注册组件
+一种写法：
+```html
+<body>
+    <div id="app">
+        <!-- 如果要使用组件，直接把组件的名称，以 HTML 标签的形式，引入到页面中，即可 -->
+        <account> </account>
+    </div>
+    <script>
+        //第一步：使用 Vue.extend 定义组件
+        var myAccount = Vue.extend({
+            template: '<div><h2>登录页面</h2> <h3>注册页面</h3></div>' // 通过 template 属性，指定了组件要展示的HTML结构。template 是 Vue 中的关键字，不能改。
+        });
+        //第二步：使用 Vue.component 注册组件
+        // Vue.component('组件的名称', 创建出来的组件模板对象)
+        Vue.component('account', myAccount); //第一个参数是组件的名称（标签名），第二个参数是模板对象
+        new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+```
+推荐写法：
+``` html
+<body>
+    <!-- 定义模板 -->
+    <template id="myAccount">
+        <div>
+            <h2>登录页面</h2>
+            <h3>注册页面</h3>
+        </div>
+    </template>
+    <div id="app">
+        <!-- 使用组件 -->
+        <account> </account>
+    </div>
+    <script>
+        //定义、注册组件
+        Vue.component('account', {
+            template: '#myAccount'    // template 是 Vue 中的关键字，不能改。
+        });
+        new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+```
+## components定义私有组件
+```JavaScript
+ <div id="app">
+        <!-- 使用Vue实例内部的私有组件 -->
+        <my-login></my-login>
+        </div>
+<script>
+        new Vue({
+            el: '#app',
+            data: {},
+            components: { // 定义、注册Vue实例内部的私有组件
+                myLogin: {
+                    template: '<h3>这是私有的login组件</h3>'
+                }
+            }
+        });
+```
+## Vue提供的<component>标签实现多个组件切换
+两个组件切换
+```HTML
+ <div id="app">
+        <!-- 【重要】component 是一个占位符, `:is` 属性,可以用来指定要展示的组件名称。这里，我们让 login组件显示出来 -->
+        <component :is="'login'"></component>
+    </div>
+    <script>
+        // 组件名称是 字符串
+        Vue.component('login', {
+            template: '<h3>登录组件</h3>'
+        })
+        Vue.component('register', {
+            template: '<h3>注册组件</h3>'
+        })
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                comName: 'login' // 当前 component 中的 :is 绑定的组件的名称
+            },
+            methods: {}
+        });
+```
+``` HTML
+<!-- 点击按钮后，设置变量`comName`为不同的值，代表着后面的component里显示不同的组件 -->
+         <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a>
+        <!-- 此处的`comName`是变量，变量值为组件名称 -->
+        <component :is="comName"></component>
+```
+多个组件切换时，通过mode属性添加过渡的动画
+``` HTML
+ <div id="app">
+        <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a>
+        <!-- 通过 mode 属性,设置组件切换时候的 过渡动画 -->
+        <!-- 【重点】亮点是 mode="out-in" 这句话 -->
+        <transition mode="out-in">
+            <component :is="comName"></component>
+        </transition>
+    </div>
+```
+多个组件切换时，如果要设置动画，可以用<transition>把组件包裹起来。需要注意的是，我给<transition>标签里添加了mode="out-in"这种模式，它表示第一个组件消失之后，第二个组件才会出现。如果没有这个mode属性，第一个组件准备消失的时候，第二个组件马上就准备出现。
