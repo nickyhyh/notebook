@@ -184,3 +184,52 @@ export default {
   },
 };
 ```
+# Pagination 分页
+layout设置需要显示的内容：prev表示上一页，pager表示页码列表，next表示下一页。jumper表示跳页元素，total表示总条目数，size用于设置每页显示的页码数量。pager-count属性可以设置最大页码按钮数。
+```html
+<div class="block">
+  <span class="demonstration">页数较少时的效果</span>
+  <el-pagination
+    :page-size="20"
+    :pager-count="11"
+    layout="prev, pager, next" 
+    :total="50">
+  </el-pagination>
+</div>
+```
+使用size-change和current-change事件来处理页码大小和当前页变动时候触发的事件。page-sizes接受一个整型数组，数组元素为展示的选择每页显示个数的选项。
+``` html
+<template>
+  <div class="block">
+    <span class="demonstration">完整功能</span>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[100, 200, 300, 400]"
+      :page-size="100"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400">
+    </el-pagination>
+  </div>
+</template>
+```
+```javascript
+<script>
+  export default {
+    methods: {
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    },
+    data() {
+      return {
+        currentPage4: 4
+      };
+    }
+  }
+</script>
+```
