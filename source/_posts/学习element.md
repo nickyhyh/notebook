@@ -233,3 +233,9 @@ layout设置需要显示的内容：prev表示上一页，pager表示页码列�
   }
 </script>
 ```
+# 自定义列模板
+通过 Scoped slot 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据。
+# 展开行
+通过设置 type="expand" 和 Scoped slot 可以开启展开行功能，el-table-column 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 Scoped slot 相同。
+row-key:行数据的key,优化table的渲染，在使用reserve-selection功能的情况下，该属性必填。传入值是一个function（row）。
+expand-row-key:该属性设置table目前的展开行，需要设置row-key属性才能使用。传入值是一个数组，元素的值是要展开的row的key。

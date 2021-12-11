@@ -1,5 +1,5 @@
 ---
-title: hexo博客
+title: hexo
 ---
 
 # 本地预览
