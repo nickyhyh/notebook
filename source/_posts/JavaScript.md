@@ -471,3 +471,325 @@ IastIndexOf()方法：返回给定元素在数组中最后一次出现的位置�
 ## 包装对象
 所谓“包装对象”，指的是与数值、字符串、布尔值分别相对应的Number、String、Boolean三个原生对象。这三个原生对象可以把原始类型的值变成（包装成）对象。这三个对象作为构造函数使用（带有new）时，可以将原始类型的值转为对象；作为普通函数使用时（不带有new），可以将任意类型的值，转为原始类型的值。
 # Boolean对象
+作为构造函数，它主要用于生成布尔值的包装对象实例。
+```JavaScript
+if (new Boolean(false)) {
+  console.log('true');
+} // true  false对应的包装对象实例是一个对象，所有对象对应的布尔值都是true。
+if (new Boolean(false).valueOf()) {
+  console.log('true');
+} // 无输出 valueOf返回实例对应的原始值
+```
+## Boolean函数的类型转换作用
+```JavaScript
+Boolean(undefined) // false
+Boolean(null) // false
+Boolean(0) // false
+Boolean('') // false
+Boolean(NaN) // false
+
+Boolean(1) // true
+Boolean('false') // true
+Boolean([]) // true
+Boolean({}) // true
+Boolean(function () {}) // true
+Boolean(/foo/) // true
+```
+使用双重的否运算符（!）也可以将任意值转为对应的布尔值。
+# Number对象
+作为构造函数时，它用于生成值为数值的对象。
+Number对象的4个实例方法：
+1.Number.prototype.toString():用来将一个数值转为字符串形式。接受一个参数，表示输出的进制。如果省略这个参数，默认将数值先转为十进制，再输出字符串；否则，就根据参数指定的进制，将一个数字转化成某个进制的字符串。
+2.Number.prototype.toFixed():先将一个数转为指定位数的小数，然后返回这个小数对应的字符串。参数为小数位数，有效范围0-100，超出则抛出RangError错误。
+3.Number.prototype.toExponential():将一个数转为科学计数法形式。参数是小数点后有效数字的位数，范围为0到100，超出这个范围，会抛出一个 RangeError 错误。
+4.Number.prototype.toPrecision():用于将一个数转为指定位数的有效数字。参数为有效数字的位数，范围是1到100，超出这个范围会抛出 RangeError 错误。
+5.Number.prototype.toLocaleString():接受一个地区码作为参数，返回一个字符串，表示当前数字在该地区的当地书写形式。
+# String对象
+用来生成字符串对象，字符串对象是一个类似数组的对象。
+## 实例方法
+1.String.prototype.charAt():返回指定位置的字符，参数从0开始编号的位置。如果参数为负数，或大于等于字符串的长度，charAt返回空字符串。
+2.Strig.prototype.charCodeAt():返回字符串指定位置的 Unicode 码点（十进制表示），相当于String.fromCharCode()的逆操作。如果参数为负数，或大于等于字符串的长度，charCodeAt返回NaN。
+3.String.prototype.concat():用于连接两个字符串，返回一个新字符串，不改变原字符串。
+4.String.prototype.slice():用于从原字符串取出子字符串并返回，不改变原字符串。不改变原字符串。它的第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）。如果省略第二个参数，则表示子字符串一直到原字符串结束。如果第一个参数大于第二个参数（正数情况下），slice()方法返回一个空字符串。
+5.String.prototype.substring():用于从原字符串取出子字符串并返回，不改变原字符串。跟slice方法很相像。如果第一个参数大于第二个参数，substring方法会自动更换两个参数的位置。如果参数是负数，substring方法会自动将负数转为0。
+6.String.prototpye.substr():用于从原字符串取出子字符串并返回，不改变原字符串，跟slice和substring方法的作用相同。substr方法的第一个参数是子字符串的开始位置（从0开始计算），第二个参数是子字符串的长度。如果第一个参数是负数，表示倒数计算的字符位置。如果第二个参数是负数，将被自动转为0，因此会返回空字符串。
+7.String.prototype.indexOf()和String.prototype.lastIndexOf()
+indexOf用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置。如果返回-1，就表示不匹配。indexOf方法还接受第二个参数，表示从该位置开始向后匹配。
+lastIndexOf从尾部开始匹配，indexOf则是从头部开始匹配。lastIndexOf的第二个参数表示从该位置起向前匹配。
+8.String.prototype.trim():用于去除字符串两端的空格，返回新字符串，不改变原字符串。
+9.String.prototype.toLowerCase()：将一个字符串全部转为小写；String.prototype.toUpperCase()：将一个字符串全部转为大写。它们都返回一个新字符串，不改变原字符串。
+10.String.prototype.match():用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null。返回的数组还有index属性和input属性，分别表示匹配字符串开始的位置和原始字符串。
+11.String.prototype.search():用法基本等同于match，但是返回值为匹配的第一个位置。如果没有找到匹配，则返回-1。
+String.prototype.replace():用于替换匹配的子字符串，一般情况下只替换第一个匹配（除非使用带有g修饰符的正则表达式）。
+12.String.prototype.split()：按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组。如果分割规则为空字符串，则返回数组的成员是原字符串的每一个字符。如果省略参数，则返回数组的唯一成员就是原字符串。如果满足分割规则的两个部分紧邻着（即两个分割符中间没有其他字符），则返回数组之中会有一个空字符串。
+``` JavaScript
+"1.2..3".split('.')   //['1', '2', '', '3']
+```
+如果满足分割规则的部分处于字符串的开头或结尾（即它的前面或后面没有其他字符），则返回数组的第一个或最后一个成员是一个空字符串。
+```JavaScript
+'|b|c'.split('|') // ["", "b", "c"]
+'a|b|'.split('|') // ["a", "b", ""]
+```
+split方法还可以接受第二个参数，限定返回数组的最大成员数。
+13.String.prototype.localeCompare():用于比较两个字符串，返回一个整数，如果小于0表示第一个字符串小于第二个；等于0表示两者相等；大于0表示第一个字符串大于第二个。该方法的特点：正常情况大写的英文字母小于小写字母，但是localeCompare方法会考虑自然语言的排序情况，将大写字母排在小写字母的后面，表示大写字母更大。
+# Math对象
+## Math.random()
+Math.random()返回0到1之间的一个伪随机数，可能等于0，但是一定小于1。
+1.任意范围的随机数生成函数
+```JavaScript
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+getRandomArbitrary(2.5, 7.5)  //5.289410648102216
+```
+2.任意范围的随机整数生成函数
+```JavaScript
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+getRandomInt(2, 5) // 3
+```
+3.返回随机字符的例子
+```JavaScript
+function random_str(length) {
+  var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  ALPHABET += 'abcdefghijklmnopqrstuvwxyz';
+  ALPHABET += '0123456789-_';
+  var str = '';
+  for(var i = 0; i < length; ++i) {
+    var rand = Math.floor(Math.random() * ALPHABET.length);
+    str += ALPHABET.substring(rand, rand + 1);
+  }
+  return str;
+}
+random_str(7) //  'hWrLy9u'
+```
+# Date对象
+## 普通函数用法
+作为普通函数直接调用，返回一个当前时间的字符串。无论是否带有参数，返回的都是当前时间。
+## 构造函数用法
+使用new命令返回一个Date对象的实例，不加参数实例代表的就是当前时间。其他对象求值时默认调用valueOf()方法，Date实例求值时调用的是toString()方法，导致返回的是一个字符串，代表该实例对应的时间。
+注意：
+1.时间参数为负数，代表1970年元旦之前的时间。
+2.只要是能被Date.parse()方法解析的字符串，都可以当做参数。
+3.参数为年、月、日等多个整数时，年和月不能省略，其他参数可省略。至少需要两个参数，因为如果只使用“年”一个参数会被解释为毫秒数。
+```JavaScript
+new Date(2013, 13) 
+// Tue Feb 01 2014 00:00:00 GMT+0800 (CST) 15折算为下一年2月,月份0-11
+new Date(2013, 0, 0)
+// Mon Dec 31 2012 00:00:00 GMT+0800 (CST)  日期为0代表上个月最后一天
+```
+```JavaScript
+//参数还可以使用负数，表示扣去的时间
+new Date(2013, -1)
+// Sat Dec 01 2012 00:00:00 GMT+0800 (CST)
+new Date(2013, 0, -1)
+// Sun Dec 30 2012 00:00:00 GMT+0800 (CST)
+```
+4.日期的运算：两个日期实例对象进行减法运算时，返回的是它们间隔的毫秒数；进行加法运算时，返回的是两个字符串连接而成的新字符串。
+## 静态方法
+1.Date.now():返回当前时间距离时间零点（1970年1月1日 00:00:00 UTC）的毫秒数。
+2.Date.parse():解析日期字符串，返回改时间距离零点的毫秒数。
+3.Date.UTC方法接受年、月、日等变量作为参数，返回距离零点的毫秒数。
+## 实例方法
+除了valueOf和toString方法以外，可分为以下三类：
+1.to类：从Date对象返回一个字符串，表示指定的时间。
+2.get类：获取Date对象的日期和时间。
+3.set类：设置Date对象的日期和时间。
+# RegExp对象
+正则表达式是一种表达文本模式的方法，按照“给定模式”匹配文本。新建正则表达式的两种方法：
+1.字面量：以斜杠开始开始和结束,`var reges = /abc/;`
+2.使用构造函数：`var regex = new RegExp('abc');`
+## 实例属性
+修饰符类，了解设置了什么修饰符。
+RegExp.prototype.ignoreCase:返回一个布尔值，表示是否设置了i修饰符。
+RegExp.prototype.global：返回一个布尔值，表示是否设置了g修饰符。
+RegExp.prototype.multiline：返回一个布尔值，表示是否设置了m修饰符。
+RegExp.prototype.flags：返回一个布尔值，包含已经设置的所有修饰符，按字母排序。
+以上属性都是只读的。
+与修饰符无关的属性有两个：
+RegExp.prototype.lastIndex：返回一个整数，表示下一次开始搜索的位置。该属性可读写。
+RegExp.prototype.source：返回正则表达式的字符串形式(不包括反斜杠)，该属性只读。
+## 实例方法
+1.RegExp.prototype.text():返回一个布尔值，表示当前模式是否能匹配参数字符串。如果正则表达式带有g修饰符，则每一次方法都从上一次结束的位置开始向后匹配。
+```JavaScript
+var r = /x/g;
+var s = '_x_x';
+r.lastIndex // 0
+r.test(s) // true
+r.lastIndex // 2
+r.test(s) // true
+r.lastIndex // 4
+r.test(s) // false
+```
+2.RegExp.prototype.exec():用来返回匹配结果。发现匹配则返回一个数组，成员是匹配成功的子字符串，否则返回null。
+如果正则表示式包含圆括号（即含有“组匹配”），则返回的数组会包括多个成员。第一个成员是整个匹配成功的结果，后面的成员就是圆括号对应的匹配成功的组。也就是说，第二个成员对应第一个括号，第三个成员对应第二个括号，以此类推。整个数组的length属性等于组匹配的数量再加1。
+```JavaScript
+var s = /a(b)/;    
+var r = 'abcdabc';    
+s.exec(r); //['ab','b']
+```
+## 字符串实例方法
+字符串的实例方法中有4种与正则表达式有关：
+1.String.prototype.match():返回一个数组，成员是所有匹配的子字符串。与exec方法比较像，但是如果正则表达式带有g修饰符，则会一次性返回匹配成功的结果。
+```JavaScript
+var s = 'abba';
+var r = /a/g;
+s.match(r) // ["a", "a"]
+r.exec(s) // ["a"]
+```
+设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始。
+```JavaScript
+var r = /a|b/g;
+r.lastIndex = 7;
+'xaxb'.match(r) // ['a', 'b']
+r.lastIndex // 0
+```
+2.String.prototype.search():按给定正则表达式进行搜索，返回第一个满足条件的匹配结果在字符串中的位置。如果没有任何匹配，则返回-1。
+3.String.prototype.replace():按给定正则表达式进行替换，返回替换后的字符串。它接受两个参数，第一个是正则表达式，表示搜索模式，第二个是替换的内容。正则表达式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值。
+replace方法：删除字符串收尾两端的空格
+```JavaScript
+var str = '   hello,jimmy !  ';
+str.replace(/^\s+|\s+$/g, '');  //'hello,jimmy !'
+```
+replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容。
+$&：匹配的子字符串。
+$`：匹配结果前面的文本。
+$'：匹配结果后面的文本。
+$n：匹配成功的第n组内容，n是从1开始的自然数。
+$$：指代美元符号$。
+```JavaScript
+'hello nicky'.replace(/(\w+)\s(\w+)/, '$2 $1')
+// "nicky hello"  
+'abc'.replace('b', '[$`-$&-$\']')
+// "a[a-b-c]c"
+```
+replace方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。
+```JavaScript
+var str = 'the cure white dog jumped over the lazy cat.'
+var pattern = /cure|white|lazy/ig;
+str.replace(pattern, function(match) {
+  return match.toUpperCase();
+});
+```
+4.String.prototype.split():按照给定规则进行字符串分割,返回一个数组，包含分割后的各个成员。该方法接受两个参数，第一个参数是正则表达式，表示分隔规则，第二个参数是返回数组的最大成员数。
+```JavaScript
+// 非正则分隔
+'a,  b,c, d'.split(',')
+// [ 'a', '  b', 'c', ' d' ]
+// 正则分隔，去除多余的空格
+'a,  b,c, d'.split(/, */)
+// [ 'a', 'b', 'c', 'd' ]
+// 指定返回数组的最大成员
+'a,  b,c, d'.split(/, */, 2)
+[ 'a', 'b' ]
+```
+## 匹配规则
+1.字面量字符和元字符
+如果在正则表达式之中，某个字符只表示它字面的含义就叫做“字面量字符”。不代表字面的意思。它们叫做“元字符”，主要有以下几个：
+(1)点字符(.)
+点字符（.）匹配除回车（\r）、换行(\n) 、行分隔符（\u2028）和段分隔符（\u2029）以外的所有字符。
+/b.t/匹配b和t之间包含任意一个字符的情况,只要这三个字符在同一行。
+(2)位置字符
+用来提示字符所处位置，主要有两个字符。
+^表示字符串开始的位置，$表示字符串结尾的位置。
+(3)选择符(|)
+竖线符号（|）在正则表达式中表示“或关系”（OR）。
+2.转义符
+正则表达式中那些有特殊含义的元字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配+，就要写成\+。
+正则表达式中，需要反斜杠转义的，一共有12个字符：^、.、[、$、(、)、|、*、+、?、{和\。需要特别注意的是，如果使用RegExp方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。
+3.特殊字符
+\cX 表示Ctrl-[X]，其中的X是A-Z之中任一个英文字母，用来匹配控制字符。
+[\b] 匹配退格键(U+0008)，不要与\b混淆。
+\n 匹配换行键。
+\r 匹配回车键。
+\t 匹配制表符 tab（U+0009）。
+\v 匹配垂直制表符（U+000B）。
+\f 匹配换页符（U+000C）。
+\0 匹配null字符（U+0000）。
+\xhh 匹配一个以两位十六进制数（\x00-\xFF）表示的字符。
+\uhhhh 匹配一个以四位十六进制数（\u0000-\uFFFF）表示的 Unicode 字符。
+4.字符类
+字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在方括号内，比如[xyz] 表示x、y、z之中任选一个匹配。
+字符类中有特殊含义：
+脱字符(^):如果方括号内的第一个字符是[^]，则表示除了字符类之中的字符，其他字符都可以匹配。比如，[^xyz]表示除了x、y、z之外都可以匹配。
+如果方括号内没有其他字符，即只有[^]，就表示匹配一切字符，其中包括换行符。相比之下，点号作为元字符（.）是不包括换行符的。脱字符只有在字符类的第一个位置才有特殊含义，否则就是字面含义。
+```JavaScript
+var s = 'Please yes\nmake my day!';
+s.match(/yes.*day/) // null
+s.match(/yes[^]*day/) // [ 'yes\nmake my day']
+```
+连字符(-):对于连续序列的字符，连字符（-）用来提供简写形式，表示字符的连续范围。比如[abc]可以写成[a-c]，[0123456789]可以写成[0-9]，同理[A-Z]表示26个大写字母。只有在方括号之中才具备简写作用。
+`[1-31]`不代表1到31，只代表1-3。
+5.预定义模式
+某些常见模式的简写方式
+\d 匹配0-9之间的任一数字，相当于[0-9]。
+\D 匹配所有0-9以外的字符，相当于[^0-9]。
+\w 匹配任意的字母、数字和下划线，相当于[A-Za-z0-9_]。
+\W 除所有字母、数字和下划线以外的字符，相当于[^A-Za-z0-9_]。
+\s 匹配空格（包括换行符、制表符、空格符等），相等于[ \t\r\n\v\f]。
+\S 匹配非空格的字符，相当于[^ \t\r\n\v\f]。
+\b 匹配词的边界。
+\B 匹配非词边界，即在词的内部。
+```JavaScript
+// \s 的例子
+/\s\w*/.exec('hello world') // [" world"]
+
+// \b 的例子
+/\bworld/.test('hello world') // true
+/\bworld/.test('hello-world') // true
+/\bworld/.test('helloworld') // false
+
+// \B 的例子
+/\Bworld/.test('hello-world') // false
+/\Bworld/.test('helloworld') // true
+
+var html = "<b>Hello</b>\n<i>world!</i>";
+
+/[\S\s]*/.exec(html)[0]
+// "<b>Hello</b>\n<i>world!</i>" [\S\s]指代一切字符。
+```
+6.重复类
+模式的精确匹配次数，使用大括号（{}）表示。{n}表示恰好重复n次，{n,}表示至少重复n次，{n,m}表示重复不少于n次，不多于m次。
+```JavaScript
+/lo{2}k/.test('look') //true
+/lo{2,5}/.test('looook')  // true
+```
+7.量词符
+用来设定某个模式出现的次数。
+? 问号表示某个模式出现0次或1次，等同于{0, 1}。
+* 星号表示某个模式出现0次或多次，等同于{0,}。
++ 加号表示某个模式出现1次或多次，等同于{1,}。
+8.贪婪模式
+量词符默认情况下都是最大可能匹配，即匹配到下一个字符不满足匹配规则为止。这被称为贪婪模式。只要一发现匹配就返回结果，不在继续检查成为非贪婪模式。如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号。+?表示只要发现一个a，就不再往下匹配了。
++?：表示某个模式出现1次或多次，匹配时采用非贪婪模式。
+*?：表示某个模式出现0次或多次，匹配时采用非贪婪模式。
+??：表格某个模式出现0次或1次，匹配时采用非贪婪模式。
+```JavaScript
+'abb'.match(/ab*/) // ["abb"]
+'abb'.match(/ab*?/) // ["a"]
+'abb'.match(/ab?/) // ["ab"]
+'abb'.match(/ab??/) // ["a"]
+```
+/ab*/表示如果a后面有多个b，那么匹配尽可能多的b；/ab*?/表示匹配尽可能少的b，也就是0个b。`
+9.修饰符
+修饰符（modifier）表示模式的附加规则，放在正则模式的最尾部。
+g修饰符：表示全局匹配，匹配全部符合条件的结果，主要用于搜索和替换。
+i修饰符:默认情况下，正则对象区分字母的大小写，加上i修饰符以后表示忽略大小写（ignoreCase）。
+m修饰符：
+10.组匹配
+正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容。
+```JavaScript
+/fred+/.test('fredd') // true  没有括号+只表示重复字母d
+/(fred)+/.test('fredfred') // true 有括号+表示匹配fred这个词
+var m = 'abcabc'.match(/(.)b(.)/);
+m  // ['abc', 'a', 'c']
+```
+正则表达式/(.)b(.)/一共使用两个括号，第一个括号捕获a，第二个括号捕获c。
+注意，使用组匹配时，不宜同时使用g修饰符，否则match方法不会捕获分组的内容。
+非捕获组：表示不返回该组匹配的内容，即匹配的结果中不计入这个括号。
+```JavaScript
+var m = 'abc'.match(/(?:.)b(.)/);
+m // ["abc", "c"]
+```
+# JSON对象
