@@ -792,6 +792,233 @@ m  // ['abc', 'a', 'c']
 var m = 'abc'.match(/(?:.)b(.)/);
 m // ["abc", "c"]
 ```
+# JSON对象
+JSON是用于数据交换的文本格式，JSON的优点是书写简单，解释引擎可直接处理。每个JSON对象都只能是一个值。
+JSON对值的规定：复合类型的值只能是对象或数组；原始类型值只有字符串、数值(十进制)、布尔值和null；字符串必须使用双引号；对象键名必须放在双引号里面；数组或对象最后一个成员的后面不能加逗号。
+JSON对象是JavaScript的原生对象，用来处理JSON格式数据。它有一下两个静态方法:
+1.JSON.stringify:用于将一个值转为 JSON 字符串。该字符串符合 JSON 格式。
+如果对象的属性是undefined、函数或 XML 对象，该属性会被JSON.stringify()过滤。
+如果数组的成员是undefined、函数或 XML 对象，则这些值被转成null。
+```JavaScript
+var obj = {
+  a: undefined,
+  b: function () {}
+};
+JSON.stringify(obj) // "{}"
+var arr = [undefined, function () {}];
+JSON.stringify(arr) // "[null,null]"
+```
+JSON.stringify()方法还可以接受一个数组，作为第二个参数，指定参数对象的哪些属性需要转成字符串。
+```JavaScript
+var obj = {
+  'prop1': 'value1',
+  'prop2': 'value2',
+  'prop3': 'value3'
+};
+var selectedProperties = ['prop1','prop2'];
+JSON.stringify(obj, selectedProperties)
+//"{"prop1":"value1","prop2":"value2"}"
+```
+递归处理中，每一次处理的对象，都是前一次返回的值。
+```JavaScript
+function f(key, value) {
+  console.log("["+ key +"]:" + value);
+  if(typeof value === 'object') {
+    return {b:2};
+  }
+  return value * 2 ; 
+}
+JSON.stringify(obj, f)
+//[]:[object Object] 第一次键名为空，键值是整个对象obj
+//[b]:2 
+//'{"b":4}'
+```
+如果处理函数返回undefined或没有返回值，则该属性会被忽略。
+```JavaScript
+function f(key, value) {
+  if (typeof(value) === "string") {
+    return undefined;
+  }
+  return value;
+}
+JSON.stringify({ a: "abc", b: 123 }, f)
+// '{"b": 123}'
+```
+如果参数对象有自定义的toJSON()方法，那么JSON.stringify()会使用这个方法的返回值作为参数，而忽略原对象的其他属性。
 
+2.JSON.parse:用于将JSON字符串转换成对应的值。如果传入的字符串不是有效的 JSON 格式，JSON.parse()方法将报错。
+为了处理解析错误，可以将JSON.parse()方法放在try...catch代码块中。
+```JavaScript
+try {
+  JSON.parse("'String'"); //双引号字符串中是单引号字符串，不符合JSON格式
+} catch(e) {
+  console.log('parsing error');
+}
+```
+JSON.parse()方法可以接受一个处理函数，作为第二个参数，用法与JSON.stringify()方法类似。
+# 面向对象编程
+## 实例对象与new命令
+1.什么是对象？
+对象就是单个实物的抽象；对象是一个容器，封装了属性（property）和方法（method）。属性是对象的状态，方法是对象的行为（完成某种任务）。
+2.构造函数
+面向对象编程的第一步，就是要生成对象。通常需要一个模板，表示某一类实物的共同特征，然后对象根据这个模板生成。JavaScript 语言的对象是基于构造函数（constructor）和原型链（prototype），使用构造函数（constructor）作为对象的模板，描述实例对象的基本结构。构造函数名字的第一个字母通常大写区别于普通函数。
+构造函数的特点有两个：
+1.函数体内部使用了this关键字，代表了所要生成的对象实例。
+2.生成对象的时候，必须使用new命令。
+## new命令
+new命令就是执行构造函数，返回一个实例对象。如果不加new命令，构造函数会变成普通函数，不会生产实例对象，此时this代表全局对象。可以在构造函数内部使用严格模式`use strict`，避免不适用new命令而调用构造函数，程序会报错。
+new命令的原理就是构造函数内部，this指向一个空对象，针对this上的操作都会发生在空对象上，将其“构造”成想要的样子。
+构造函数内部有return语句，而且return后面跟着一个对象，new命令会返回return语句指定的对象；否则，就会不管return语句，返回this对象。但是，如果return语句返回的是一个跟this无关的新对象，new命令会返回这个新对象，而不是this对象。
+```JavaScript
+var Vehicle = function (){
+  this.price = 1000;
+  return { price: 2000 };
+};
+(new Vehicle()).price  // 2000
+```
+函数内部可以使用new.target属性。如果当前函数是new命令调用，new.target指向当前函数，否则为undefined。
+## Object.create() 创建实例对象 
+以现有的对象作为模板，生成新的实例对象，这时就可以使用Object.create()方法。
+## this关键字
+this就是属性或方法“当前”所在的对象。在构造函数中表示实例对象。由于对象的属性可以赋给另一个对象，所以属性所在的当前对象是可变的，即this的指向是可变的。
 
+this的使用场合：
+1.全局环境；this指的是顶层对象window。
+2.构造函数：this指向实例对象。
+3.对象的方法；this的指向就是方法运行时所在的对象。若该方法赋值给另一个对象，this的指向就会改变。
 
+如果this所在的方法不在对象的第一层，这时this只是指向当前一层的对象，而不会继承更上面的层。
+```JavaScript
+var a = {
+  p: 'Hello',
+  b: {
+    m: function() {
+      console.log(this.p);
+    }
+  }
+};
+a.b.m() // undefined
+```
+如果这时将嵌套对象内部的方法赋值给一个变量，this依然会指向全局对象。
+```JavaScript
+var a = {
+  b: {
+    m: function() {
+      console.log(this.p);
+    },
+    p: 'Hello'
+  }
+};
+var hello = a.b.m;
+hello() // undefined
+```
+注意：
+1.避免多层this，如果不能避免，解决方法如下：在第二层改用一个指向外层this的变量。
+```JavaScript
+var f = {
+  a：function() {
+    console.log(this);
+    var that = this;  //变量that固定指向外层的this
+    var b = function() {
+      console.log(that); //在内层使用that，this指向就不会发生改变。
+    }();
+  }
+}
+f.a() 
+//Object
+//Object
+```
+2.避免数组处理方法中的this：数组的map和foreach方法，允许提供一个函数作为参数。这个函数内部不应该使用this。除了使用中间变量固定this，还可以将this作为forEach方法的第二个参数，固定运行环境。
+```JavaScript
+var o = {
+  v: 'hello',
+  p: [ 'a1', 'a2' ],
+  f: function f() {
+    this.p.forEach(function (item) {
+      console.log(this.v + ' ' + item);
+    }, this);
+  }
+}
+o.f()
+// hello a1
+// hello a2
+```
+3.避免回调函数中的this：回调函数中的this往往会改变指向。
+## 绑定this的方法
+JavaScript 提供了call、apply、bind这三个方法，来切换/固定this的指向。
+1.Function.prototype.call() ：可以指定函数内部this指向函数执行时所在的作用域，然后调用该函数。call方法的参数，应该是一个对象。如果参数为空、null和undefined，则默认传入全局对象。如果call方法的参数是一个原始值，那么这个原始值会自动转成对应的包装对象，然后传入call方法。
+`func.call(thisvalue,arg1,arg2,...)`call的第一个参数就是this所要指向的那个对象，后面的参数则是函数调用时所需的参数。
+2.Function.prototype.apply()：与call方法类似，唯一的区别就是它接收一个数组作为函数执行时的参数。
+`func.apply(thisvalue,[arg1,arg2,...])`apply方法的第一个参数也是this所要指向的那个对象，如果设为null或undefined，则等同于指定全局对象。第二个参数则是一个数组，该数组的所有成员依次作为参数，传入原函数。
+案例：找出数组最大元素,结合apply和Math.max方法
+```JavaScript
+var ary = [9,5,7,12,16];
+Math.max.apply(null,ary) //16
+```
+案例：将数据的空元素变为undefined
+```JavaScript
+Array.apply(null,['a', ,'b']) 
+//[ 'a', undefined, 'b' ]
+```
+空元素与undefined的差别在于，数组的forEach方法会跳过空元素，但是不会跳过undefined。因此，遍历内部元素的时候，会得到不同的结果。
+
+案例：转换类似数组的对象，将对象转成数组。
+这个方法起作用的前提是，被处理的对象必须有length属性，以及相对应的数字键。
+```JavaScript
+Array.prototype.slice.apply({0: 1, length: 1}) // [1]
+Array.prototype.slice.apply({0: 1}) // []
+Array.prototype.slice.apply({0: 1, length: 2}) // [1, undefined]
+Array.prototype.slice.apply({length: 1}) // [undefined]
+```
+3.Function.prototype.bind():用于将函数体内的this绑定到某个对象，然后返回一个新函数。bind方法的参数就是所要绑定this的对象。
+注意：每一次返回一个新函数；结合回调函数使用。
+## 对象的继承
+原型对象(prototype)：定义所有实例对象共享的属性和方法。
+原型链：任何对象都有自己的原型，并且也可以充当其他对象的原型，因此就会形成一个“原型链”。所有对象的原型最终都可以上溯到Object.prototype，即Object构造函数的prototype属性，因此对象都有valueOf和toString方法。Object.prototype对象的原型是null，null没有任何属性和方法。因此原型链的尽头就是null。
+prototype对象有一个constructor属性，默认指向prototype对象所在的构造函数。constructor属性的作用是可以得知某个实例对象，到底是哪一个构造函数产生的。constructor属性表示原型对象与构造函数之间的关联关系，如果修改了原型对象，一般会同时修改constructor属性。
+instanceof运算符返回一个布尔值，表示对象是否为某个构造函数的实例。
+## 构造函数的继承
+一个构造函数继承另一个构造函数分为两步：第一步在子类的构造函数中调用父类的构造函数。第二部是让子类的原型指向父类的原型。
+```JavaScript
+Sub.prototype = Object.create(Super.prototype);
+Sub.prototype.constructor = Sub;
+Sub.prototype.method = '...';
+```
+Sub.prototype是子类的原型，要将它赋值为Object.create(Super.prototype)，而不是直接等于Super.prototype。否则后面两行对Sub.prototype的操作，会连父类的原型Super.prototype一起修改掉。
+## Object对象的相关方法
+1.Object.getPrototypeOf()：返回参数对象的原型。
+特殊对象的原型
+```JavaScript
+// 空对象的原型是 Object.prototype
+Object.getPrototypeOf({}) === Object.prototype // true
+// Object.prototype 的原型是 null
+Object.getPrototypeOf(Object.prototype) === null// true
+// 函数的原型是 Function.prototype
+function f() {}
+Object.getPrototypeOf(f) === Function.prototype // true
+```
+2.Object.setPrototypeOf():为参数对象设置原型，返回该参数对象。接收两个参数，第一个是现有对象，第二个是原型对象。
+使用setPrototypeOf方法模拟new命令
+```JavaScript
+var F = function () {
+  this.foo = 'bar';
+};
+var f = new F(); //等同于
+var f = Object.setPrototypeof({},F.prototype);
+F.call(f);
+```
+3.Object.create()：接收一个对象作为参数，以它为原型返回一个实例对象，该实例完全继承原型对象的属性。Object.create()方法生成的新对象，动态继承了原型。在原型上添加或修改任何方法，会立刻反映在新对象之上。
+三种生产新对象的方式：
+```JavaScript
+var obj1 = Object.create({});
+var obj2 = Object.create(Object.prototype);
+var obj3 = new Object();
+```
+4.Object.prototype.isPrototypeOf()：用来判断该对象是否为参数对象的原型。Object.prototype处于原型链的最顶端，所以对各种实例都返回true，对继承自null的对象返回false。
+5.Object.prototype.__proto__：proto的前后都是两个下划线，返回该对象的原型，这个属性可读写。
+`obj.__proto__ = p;//将p对象设为obj对象的原型`
+6.Object.getOwnPropertyNames()：返回一个数组，成员是参数对象本身的所有属性的键名，不包含继承的属性键名。
+7.Object.prototype.hasOwnProperty()：返回一个布尔值，判断某个属性定义在对象自身还是原型链上。
+8.in运算符和for...in循环：
+in运算符返回一个布尔值表示对象是否具有某个属性。不区分属性是对象自身还是继承的属性。通常用于检查一个属性是否存在。
+for...in循环获得对象所有可遍历属性，不管是自身的还是继承的。

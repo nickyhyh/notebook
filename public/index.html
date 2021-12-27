@@ -104,6 +104,52 @@
         
           <section id="main">
   
+    <article id="post-hexo博客"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/notebook/2021/12/12/hexo%E5%8D%9A%E5%AE%A2/">hexo</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/notebook/2021/12/12/hexo%E5%8D%9A%E5%AE%A2/" class="article-date">
+	  <time datetime="2021-12-11T16:07:08.670Z" itemprop="datePublished">十二月 12, 2021</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h1><p>1.启动:<code>npm run server</code><br>2.停止预览：ctrl+c</p>
+<h1 id="启动elm后台管理系统"><a href="#启动elm后台管理系统" class="headerlink" title="启动elm后台管理系统"></a>启动elm后台管理系统</h1><p><code>npm run dev</code></p>
+<h1 id="在html里面调用vue"><a href="#在html里面调用vue" class="headerlink" title="在html里面调用vue"></a>在html里面调用vue</h1><script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<p>注意各个同级属性间“,”分割</p>
+<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><p>ctrl+x:删除一行<br>ctrl+f:查找</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-JavaScript"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -286,61 +332,45 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;[&quot;</span>+ key +<span class="string">&quot;]:&quot;</span> + value);</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> value === <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">b</span>:<span class="number">2</span>&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> value * <span class="number">2</span> ; </span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">JSON</span>.stringify(obj, f)</span><br><span class="line"><span class="comment">//[]:[object Object] 第一次键名为空，键值是整个对象obj</span></span><br><span class="line"><span class="comment">//[b]:2 </span></span><br><span class="line"><span class="comment">//&#x27;&#123;&quot;b&quot;:4&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>如果处理函数返回undefined或没有返回值，则该属性会被忽略。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span>(value) === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">JSON</span>.stringify(&#123; <span class="attr">a</span>: <span class="string">&quot;abc&quot;</span>, <span class="attr">b</span>: <span class="number">123</span> &#125;, f)</span><br><span class="line"><span class="comment">// &#x27;&#123;&quot;b&quot;: 123&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>如果参数对象有自定义的toJSON()方法，那么JSON.stringify()会使用这个方法的返回值作为参数，而忽略原对象的其他属性。<br>2.JSON.parse:用于将JSON字符串转换成对应的值。如果传入的字符串不是有效的 JSON 格式，JSON.parse()方法将报错。<br>为了处理解析错误，可以将JSON.parse()方法放在try…catch代码块中。</p>
-<pre><code class="JavaScript">try &#123;
-  JSON.parse(&quot;&#39;String&#39;&quot;); //双引号字符串中是单引号字符串，不符合JSON格式
-&#125; catch(e) &#123;
-  console.log(&#39;parsing error&#39;);
-&#125;
-JSON.parse()方法可以接受一个处理函数，作为第二个参数，用法与JSON.stringify()方法类似。
-# 面向对象编程
-</code></pre>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-hexo博客"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/notebook/2021/12/11/hexo%E5%8D%9A%E5%AE%A2/">hexo</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/notebook/2021/12/11/hexo%E5%8D%9A%E5%AE%A2/" class="article-date">
-	  <time datetime="2021-12-11T15:47:07.031Z" itemprop="datePublished">十二月 11, 2021</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h1><p>1.启动:<code>npm run server</code><br>2.停止预览：ctrl+c</p>
-<h1 id="启动elm后台管理系统"><a href="#启动elm后台管理系统" class="headerlink" title="启动elm后台管理系统"></a>启动elm后台管理系统</h1><p><code>npm run dev</code></p>
-<h1 id="在html里面调用vue"><a href="#在html里面调用vue" class="headerlink" title="在html里面调用vue"></a>在html里面调用vue</h1><script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-<p>注意各个同级属性间“,”分割</p>
-<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><p>ctrl+x:删除一行<br>ctrl+f:查找</p>
+<p>如果参数对象有自定义的toJSON()方法，那么JSON.stringify()会使用这个方法的返回值作为参数，而忽略原对象的其他属性。</p>
+<p>2.JSON.parse:用于将JSON字符串转换成对应的值。如果传入的字符串不是有效的 JSON 格式，JSON.parse()方法将报错。<br>为了处理解析错误，可以将JSON.parse()方法放在try…catch代码块中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="built_in">JSON</span>.parse(<span class="string">&quot;&#x27;String&#x27;&quot;</span>); <span class="comment">//双引号字符串中是单引号字符串，不符合JSON格式</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;parsing error&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JSON.parse()方法可以接受一个处理函数，作为第二个参数，用法与JSON.stringify()方法类似。</p>
+<h1 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h1><h2 id="实例对象与new命令"><a href="#实例对象与new命令" class="headerlink" title="实例对象与new命令"></a>实例对象与new命令</h2><p>1.什么是对象？<br>对象就是单个实物的抽象；对象是一个容器，封装了属性（property）和方法（method）。属性是对象的状态，方法是对象的行为（完成某种任务）。<br>2.构造函数<br>面向对象编程的第一步，就是要生成对象。通常需要一个模板，表示某一类实物的共同特征，然后对象根据这个模板生成。JavaScript 语言的对象是基于构造函数（constructor）和原型链（prototype），使用构造函数（constructor）作为对象的模板，描述实例对象的基本结构。构造函数名字的第一个字母通常大写区别于普通函数。<br>构造函数的特点有两个：<br>1.函数体内部使用了this关键字，代表了所要生成的对象实例。<br>2.生成对象的时候，必须使用new命令。</p>
+<h2 id="new命令"><a href="#new命令" class="headerlink" title="new命令"></a>new命令</h2><p>new命令就是执行构造函数，返回一个实例对象。如果不加new命令，构造函数会变成普通函数，不会生产实例对象，此时this代表全局对象。可以在构造函数内部使用严格模式<code>use strict</code>，避免不适用new命令而调用构造函数，程序会报错。<br>new命令的原理就是构造函数内部，this指向一个空对象，针对this上的操作都会发生在空对象上，将其“构造”成想要的样子。<br>构造函数内部有return语句，而且return后面跟着一个对象，new命令会返回return语句指定的对象；否则，就会不管return语句，返回this对象。但是，如果return语句返回的是一个跟this无关的新对象，new命令会返回这个新对象，而不是this对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">price</span>: <span class="number">2000</span> &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">(<span class="keyword">new</span> Vehicle()).price  <span class="comment">// 2000</span></span><br></pre></td></tr></table></figure>
+<p>函数内部可以使用new.target属性。如果当前函数是new命令调用，new.target指向当前函数，否则为undefined。</p>
+<h2 id="Object-create-创建实例对象"><a href="#Object-create-创建实例对象" class="headerlink" title="Object.create() 创建实例对象"></a>Object.create() 创建实例对象</h2><p>以现有的对象作为模板，生成新的实例对象，这时就可以使用Object.create()方法。</p>
+<h2 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h2><p>this就是属性或方法“当前”所在的对象。在构造函数中表示实例对象。由于对象的属性可以赋给另一个对象，所以属性所在的当前对象是可变的，即this的指向是可变的。</p>
+<p>this的使用场合：<br>1.全局环境；this指的是顶层对象window。<br>2.构造函数：this指向实例对象。<br>3.对象的方法；this的指向就是方法运行时所在的对象。若该方法赋值给另一个对象，this的指向就会改变。</p>
+<p>如果this所在的方法不在对象的第一层，这时this只是指向当前一层的对象，而不会继承更上面的层。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  <span class="attr">p</span>: <span class="string">&#x27;Hello&#x27;</span>,</span><br><span class="line">  <span class="attr">b</span>: &#123;</span><br><span class="line">    <span class="attr">m</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.p);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">a.b.m() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>如果这时将嵌套对象内部的方法赋值给一个变量，this依然会指向全局对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  <span class="attr">b</span>: &#123;</span><br><span class="line">    <span class="attr">m</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.p);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">p</span>: <span class="string">&#x27;Hello&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> hello = a.b.m;</span><br><span class="line">hello() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>注意：<br>1.避免多层this，如果不能避免，解决方法如下：在第二层改用一个指向外层this的变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = &#123;</span><br><span class="line">  a：<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>);</span><br><span class="line">    <span class="keyword">var</span> that = <span class="built_in">this</span>;  <span class="comment">//变量that固定指向外层的this</span></span><br><span class="line">    <span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(that); <span class="comment">//在内层使用that，this指向就不会发生改变。</span></span><br><span class="line">    &#125;();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">f.a() </span><br><span class="line"><span class="comment">//Object</span></span><br><span class="line"><span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
+<p>2.避免数组处理方法中的this：数组的map和foreach方法，允许提供一个函数作为参数。这个函数内部不应该使用this。除了使用中间变量固定this，还可以将this作为forEach方法的第二个参数，固定运行环境。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  <span class="attr">v</span>: <span class="string">&#x27;hello&#x27;</span>,</span><br><span class="line">  <span class="attr">p</span>: [ <span class="string">&#x27;a1&#x27;</span>, <span class="string">&#x27;a2&#x27;</span> ],</span><br><span class="line">  <span class="attr">f</span>: <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.p.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.v + <span class="string">&#x27; &#x27;</span> + item);</span><br><span class="line">    &#125;, <span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.f()</span><br><span class="line"><span class="comment">// hello a1</span></span><br><span class="line"><span class="comment">// hello a2</span></span><br></pre></td></tr></table></figure>
+<p>3.避免回调函数中的this：回调函数中的this往往会改变指向。</p>
+<h2 id="绑定this的方法"><a href="#绑定this的方法" class="headerlink" title="绑定this的方法"></a>绑定this的方法</h2><p>JavaScript 提供了call、apply、bind这三个方法，来切换/固定this的指向。<br>1.Function.prototype.call() ：可以指定函数内部this指向函数执行时所在的作用域，然后调用该函数。call方法的参数，应该是一个对象。如果参数为空、null和undefined，则默认传入全局对象。如果call方法的参数是一个原始值，那么这个原始值会自动转成对应的包装对象，然后传入call方法。<br><code>func.call(thisvalue,arg1,arg2,...)</code>call的第一个参数就是this所要指向的那个对象，后面的参数则是函数调用时所需的参数。<br>2.Function.prototype.apply()：与call方法类似，唯一的区别就是它接收一个数组作为函数执行时的参数。<br><code>func.apply(thisvalue,[arg1,arg2,...])</code>apply方法的第一个参数也是this所要指向的那个对象，如果设为null或undefined，则等同于指定全局对象。第二个参数则是一个数组，该数组的所有成员依次作为参数，传入原函数。<br>案例：找出数组最大元素,结合apply和Math.max方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary = [<span class="number">9</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">12</span>,<span class="number">16</span>];</span><br><span class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>,ary) <span class="comment">//16</span></span><br></pre></td></tr></table></figure>
+<p>案例：将数据的空元素变为undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.apply(<span class="literal">null</span>,[<span class="string">&#x27;a&#x27;</span>, ,<span class="string">&#x27;b&#x27;</span>]) </span><br><span class="line"><span class="comment">//[ &#x27;a&#x27;, undefined, &#x27;b&#x27; ]</span></span><br></pre></td></tr></table></figure>
+<p>空元素与undefined的差别在于，数组的forEach方法会跳过空元素，但是不会跳过undefined。因此，遍历内部元素的时候，会得到不同的结果。</p>
+<p>案例：转换类似数组的对象，将对象转成数组。<br>这个方法起作用的前提是，被处理的对象必须有length属性，以及相对应的数字键。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.slice.apply(&#123;<span class="number">0</span>: <span class="number">1</span>, <span class="attr">length</span>: <span class="number">1</span>&#125;) <span class="comment">// [1]</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.apply(&#123;<span class="number">0</span>: <span class="number">1</span>&#125;) <span class="comment">// []</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.apply(&#123;<span class="number">0</span>: <span class="number">1</span>, <span class="attr">length</span>: <span class="number">2</span>&#125;) <span class="comment">// [1, undefined]</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.apply(&#123;<span class="attr">length</span>: <span class="number">1</span>&#125;) <span class="comment">// [undefined]</span></span><br></pre></td></tr></table></figure>
+<p>3.Function.prototype.bind():用于将函数体内的this绑定到某个对象，然后返回一个新函数。bind方法的参数就是所要绑定this的对象。<br>注意：每一次返回一个新函数；结合回调函数使用。</p>
+<h2 id="对象的继承"><a href="#对象的继承" class="headerlink" title="对象的继承"></a>对象的继承</h2><p>原型对象(prototype)：定义所有实例对象共享的属性和方法。<br>原型链：任何对象都有自己的原型，并且也可以充当其他对象的原型，因此就会形成一个“原型链”。所有对象的原型最终都可以上溯到Object.prototype，即Object构造函数的prototype属性，因此对象都有valueOf和toString方法。Object.prototype对象的原型是null，null没有任何属性和方法。因此原型链的尽头就是null。<br>prototype对象有一个constructor属性，默认指向prototype对象所在的构造函数。constructor属性的作用是可以得知某个实例对象，到底是哪一个构造函数产生的。constructor属性表示原型对象与构造函数之间的关联关系，如果修改了原型对象，一般会同时修改constructor属性。<br>instanceof运算符返回一个布尔值，表示对象是否为某个构造函数的实例。</p>
+<h2 id="构造函数的继承"><a href="#构造函数的继承" class="headerlink" title="构造函数的继承"></a>构造函数的继承</h2><p>一个构造函数继承另一个构造函数分为两步：第一步在子类的构造函数中调用父类的构造函数。第二部是让子类的原型指向父类的原型。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sub.prototype = <span class="built_in">Object</span>.create(Super.prototype);</span><br><span class="line">Sub.prototype.constructor = Sub;</span><br><span class="line">Sub.prototype.method = <span class="string">&#x27;...&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>Sub.prototype是子类的原型，要将它赋值为Object.create(Super.prototype)，而不是直接等于Super.prototype。否则后面两行对Sub.prototype的操作，会连父类的原型Super.prototype一起修改掉。</p>
+<h2 id="Object对象的相关方法"><a href="#Object对象的相关方法" class="headerlink" title="Object对象的相关方法"></a>Object对象的相关方法</h2><p>1.Object.getPrototypeOf()：返回参数对象的原型。<br>特殊对象的原型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 空对象的原型是 Object.prototype</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(&#123;&#125;) === <span class="built_in">Object</span>.prototype <span class="comment">// true</span></span><br><span class="line"><span class="comment">// Object.prototype 的原型是 null</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="built_in">Object</span>.prototype) === <span class="literal">null</span><span class="comment">// true</span></span><br><span class="line"><span class="comment">// 函数的原型是 Function.prototype</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(f) === <span class="built_in">Function</span>.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>2.Object.setPrototypeOf():为参数对象设置原型，返回该参数对象。接收两个参数，第一个是现有对象，第二个是原型对象。<br>使用setPrototypeOf方法模拟new命令</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.foo = <span class="string">&#x27;bar&#x27;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F(); <span class="comment">//等同于</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="built_in">Object</span>.setPrototypeof(&#123;&#125;,F.prototype);</span><br><span class="line">F.call(f);</span><br></pre></td></tr></table></figure>
+<p>3.Object.create()：接收一个对象作为参数，以它为原型返回一个实例对象，该实例完全继承原型对象的属性。Object.create()方法生成的新对象，动态继承了原型。在原型上添加或修改任何方法，会立刻反映在新对象之上。<br>三种生产新对象的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = <span class="built_in">Object</span>.create(&#123;&#125;);</span><br><span class="line"><span class="keyword">var</span> obj2 = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.prototype);</span><br><span class="line"><span class="keyword">var</span> obj3 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+<p>4.Object.prototype.isPrototypeOf()：用来判断该对象是否为参数对象的原型。Object.prototype处于原型链的最顶端，所以对各种实例都返回true，对继承自null的对象返回false。<br>5.Object.prototype.__proto__：proto的前后都是两个下划线，返回该对象的原型，这个属性可读写。<br><code>obj.__proto__ = p;//将p对象设为obj对象的原型</code><br>6.Object.getOwnPropertyNames()：返回一个数组，成员是参数对象本身的所有属性的键名，不包含继承的属性键名。<br>7.Object.prototype.hasOwnProperty()：返回一个布尔值，判断某个属性定义在对象自身还是原型链上。<br>8.in运算符和for…in循环：<br>in运算符返回一个布尔值表示对象是否具有某个属性。不区分属性是对象自身还是继承的属性。通常用于检查一个属性是否存在。<br>for…in循环获得对象所有可遍历属性，不管是自身的还是继承的。</p>
 
       
     </div>
@@ -796,7 +826,7 @@ JSON.parse()方法可以接受一个处理函数，作为第二个参数，用�
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/notebook/2021/12/12/JavaScript/">javascript</a></h6>
+              <h6 style="margin: 0;"><a href="/notebook/2021/12/12/hexo%E5%8D%9A%E5%AE%A2/">hexo</a></h6>
               <span>十二月 12, 2021</span>
             </div>
 
@@ -808,8 +838,8 @@ JSON.parse()方法可以接受一个处理函数，作为第二个参数，用�
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/notebook/2021/12/11/hexo%E5%8D%9A%E5%AE%A2/">hexo</a></h6>
-              <span>十二月 11, 2021</span>
+              <h6 style="margin: 0;"><a href="/notebook/2021/12/12/JavaScript/">javascript</a></h6>
+              <span>十二月 12, 2021</span>
             </div>
 
           </li>
