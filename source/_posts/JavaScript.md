@@ -1022,3 +1022,116 @@ var obj3 = new Object();
 8.in运算符和for...in循环：
 in运算符返回一个布尔值表示对象是否具有某个属性。不区分属性是对象自身还是继承的属性。通常用于检查一个属性是否存在。
 for...in循环获得对象所有可遍历属性，不管是自身的还是继承的。
+# DOM
+DOM 是 JavaScript 操作网页的接口，全称为“文档对象模型”。它的作用是将网页转为一个 JavaScript 对象，从而可以用脚本进行各种操作（比如增删内容）。
+## 节点
+DOM 的最小组成单位叫做节点（node）。浏览器提供一个原生节点Node，下面七种节点类型都继承了Node。
+1.Document：整个文档树的顶层节点
+2.DocumentType：doctype标签（比如<!DOCTYPE html>）
+3.Element：网页的各种HTML标签（比如<body>、<a>等）
+4.Attr：网页元素的属性（比如class="right"）
+5.Text：标签之间或标签包含的文本
+6.Comment：注释
+7.DocumentFragment：文档的片段
+## Node接口
+所有 DOM 节点对象都继承了 Node 接口，拥有一些共同的属性和方法。
+### 属性：
+1.Node.prototype.nodeType ：返回一个整数值，表示节点的类型。
+不同节点的nodeType属性值对应常量如下：
+文档节点(document)：9，对应常量Node.DOCUMENT_NODE
+元素节点(element):1,对应常量Node.ELEMENT_NODE
+属性节点(attr):2,对应常量Node.ATTRIBUTE_NODE
+文本节点(text):3，对应常量Node.TEXT_NODE
+文档片段节点(DocumentFragment):11,对应常量Node.DOCUMENT_FRAGMENT_NODE
+文档类型节点(DocumentType):10,对应常量Node.DOCUMENT_TYPE_NODE
+注释节点(Comment):8,对应常量Node.COMMENT_NODE
+2.Node.prototype.nodeName:返回节点的名称。
+不同节点的nodeName属性值如下。
+文档节点（document）：#document
+元素节点（element）：大写的标签名
+属性节点（attr）：属性的名称
+文本节点（text）：#text
+文档片断节点（DocumentFragment）：#document-fragment
+文档类型节点（DocumentType）：文档的类型
+注释节点（Comment）：#comment
+3.Node.prototype.nodeValue :返回一个字符串，表示当前节点本身的文本值，该属性可读写。
+只有文本节点（text）、注释节点（comment）和属性节点（attr）有文本值，因此这三类节点的nodeValue可以返回结果，其他类型的节点一律返回null。
+```JavaScript
+// HTML 代码如下
+// <div id="d1">hello world</div>
+var div = document.getElementById('d1');
+div.nodeValue // div是元素节点，返回null
+div.firstChild.nodeValue // firstchild是文本节点，返回"hello world"
+```
+4.Node.prototype.textContent :返回当前节点和它的所有后代节点的文本内容。对于文本节点（text）、注释节点（comment）和属性节点（attr），textContent属性的值与nodeValue属性相同。对于其他类型的节点，该属性会将每个子节点（不包括注释节点）的内容连接在一起返回。如果一个节点没有子节点，则返回空字符串。文档节点（document）和文档类型节点（doctype）的textContent属性为null。如果要读取整个文档的内容，可以使用document.documentElement.textContent。
+5.Node.prototype.baseURI:返回一个字符串，表示当前网页的绝对路径。浏览器会根据此属性计算网页上的相对路径的URL。如果无法读到网页的 URL，baseURI属性返回null。可以通过hmtl的base标签改变该属性的值。
+6.Node.prototype.ownerDocument:返回当前节点所在的顶层文档对象，即document对象。document对象本身的ownerDocument属性，返回null。
+7.Node.prototype.nextSibling:返回紧跟在当前节点后面的第一个同级节点。没有同级节点则返回null。注意，该属性还包括文本节点和注释节点（<!-- comment -->）。因此如果当前节点后面有空格，该属性会返回一个文本节点，内容为空格。
+nextSibling属性遍历所有子节点：
+```JavaScript
+var e = document.getElementById('div1').firstChild;
+while (e !== null) {
+  console.log(e.nodeName);
+  e = e.nextSibling;
+}
+```
+8.Node.prototype.previousSibling：返回当前节点前面的、距离最近的一个同级节点。没有同级节点则返回null。注意，该属性还包括文本节点和注释节点。因此如果当前节点前面有空格，该属性会返回一个文本节点，内容为空格。
+9.Node.prototype.parentNode：返回当前节点的父节点。对于一个节点来说，它的父节点只可能是三种类型：元素节点（element）、文档节点（document）和文档片段节点（documentfragment）。文档节点（document）和文档片段节点（documentfragment）的父节点都是null。
+10.Node.prototype.parentElement：返回当前节点的父元素节点。如果没有父节点或者父节点类型不是元素节点，则返回null。
+11.Node.prototype.firstChild：返回当前节点的第一个子节点，没有则返回null。注意，firstChild返回的除了元素节点，还可能是文本节点或注释节点。
+```JavaScript
+// HTML 代码如下
+// <p id="p1">
+//   <span>First span</span>
+//  </p>
+var p1 = document.getElementById('p1');
+p1.firstChild.nodeName // "#text"   P元素和span元素直接有空白字符，所以返回的是文本节点
+```
+Node.prototype.lastChild：返回当前节点的最后一个子节点，没有则返回null。
+12.Node.prototype.childNodes：返回一个类似数组的对象(Nodelist集合)，成员包括当前节点的所有子节点。文档节点（document）就有两个子节点：文档类型节点（docType）和 HTML 根元素节点。
+```JavaScript
+var children = document.childNodes;
+for (var i = 0; i < children.length; i++) {
+  console.log(children[i].nodeType);
+}
+// 10  文档节点
+// 1   元素节点
+```
+注意，除了元素节点，childNodes属性的返回值还包括文本节点和注释节点。如果当前节点不包括任何子节点，则返回一个空的NodeList集合。
+13.Node.prototype.isConnected：返回一个布尔值，表示当前节点是否在文档中。
+### 方法
+1.Node.prototype.appendChild()：接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点。返回值是插入文档的子节点。如果参数节点是 DOM 已经存在的节点，appendChild()方法会将其从原来的位置，移动到新位置。如果appendChild()方法的参数是DocumentFragment节点，那么插入的是DocumentFragment的所有子节点，而不是DocumentFragment节点本身。返回值是一个空的DocumentFragment节点。
+2.Node.prototype.hasChildNodes()：返回一个布尔值，表示当前节点是否有子节点。注意：子节点包括所有类型的节点，并不仅仅是元素节点。哪怕节点只包含一个空格，hasChildNodes方法也会返回true。
+判断一个节点是否有子节点的三种方法：
+node.hasChildNodes()
+node.firstChild !== null
+node.childNodes && node.childNodes.length > 0
+3.Node.prototype.cloneNode()：用于克隆一个节点。它接受一个布尔值作为参数，表示是否同时克隆子节点。它的返回值是一个克隆出来的新节点。
+4.Node.prototype.insertBefore()：用于将某个节点插入父节点内部的指定位置。第一个参数是要插入的节点，第二个参数是父节点内部的一个子节点。如果第二个参数为null，新节点将插在当前节点的最后位置，变成最后一个子节点。
+新建的P节点成为documen.body的第一个子节点：
+```JavaScript
+var p = document.createElement('p');
+document.body.insertBefore(p, document.body.firstChild);
+```
+新节点要插在父节点的某个子节点后面，可以用insertBefore方法结合nextSibling属性
+`parent.insertBefore(s1,s2.nextSibling);`
+5.Node.prototype.removeChild():接受一个子节点作为参数，用于从当前节点移除该子节点。返回值是移除的子节点。
+移除当前节点的所有子节点:
+```JavaScript
+var element = document.getElementById('top');
+while (element.firstChild) {
+  element.removeChild(element.firstChild);
+}
+```
+6.Node.prototype.replaceChild():用于将一个新的节点，替换当前节点的某一个子节点。返回值是替换走的节点。
+`var replacedNode = parentNode.replaceChild(newChild,oldChild)`
+7.Node.prototype.contains():返回一个布尔值，表示参数节点是否满足以下三个条件之一。
+参数节点为当前节点。
+参数节点为当前节点的子节点。
+参数节点为当前节点的后代节点。
+8.Node.prototype.compareDocumentPosition()
+:与contains方法完全一致，返回一个六个比特位的二进制值，表示参数节点与当前节点的关系。
+9.Node.prototype.isEqualNode():返回一个布尔值，用于检查两个节点是否相等。所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同。
+Node.prototype.isSameNode():返回一个布尔值，表示两个节点是否为同一个节点。
+10.Node.prototype.normalize():用于清理当前节点内部的所有文本节点（text）。
+11.Node.prototype.getRootNode:返回当前节点所在文档的根节点document，与ownerDocument属性的作用相同。
